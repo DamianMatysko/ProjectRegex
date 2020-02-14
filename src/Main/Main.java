@@ -59,16 +59,18 @@ public class Main {
     }
     public static void findMatchesInList(ArrayList<String> list, String pattern){
         Pattern pattern1=Pattern.compile(pattern);
-
+        int count=0;
         for (int i=0; list.size()>i;i++) {
 
             if (list.get(i) != null) {
                 Matcher matcher = pattern1.matcher(list.get(i));
                 while (matcher.find()) {
-                    System.out.println("Found match: " + matcher.group());
+                    System.out.println(matcher.group());
+                    count++;
                 }
             }
         }
+        System.out.println("Matches: "+count);
         System.out.println();
     }
 }
