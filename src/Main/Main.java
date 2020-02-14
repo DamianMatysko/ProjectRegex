@@ -15,7 +15,7 @@ import sk.itsovy.data.PersonalID;
 
 public class Main {
     private static final String ipadresPattern = "((2[0-5][0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(2[0-5][0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])[$0-9]";
-    private static final String slovakIdPattern = "([0-9]{2}[0156][0-9]{3}\\/?[0-9]{3,4})[^\\w]";
+    private static final String slovakIdPattern = "^[0-9]{2}[0156][0-9]{3}\\/?[0-9]{3,4}$";
     private static final String datePattern="^((([1-9]|([1-2][0-9]|31|30))\\.(1|3|5|7|9|11))|(([1-9]|([1-2][0-9]))\\.(2|4|6|8|10|12)))\\.((19|20)([0-9]{2}))$";
     private static final String macAdressPattern="^([0-9A-Fa-z]{2}[:-]){5}([0-9A-Fa-z]{2})$";
 
@@ -30,16 +30,16 @@ public class Main {
         //findMatches(dataIP.get(),ipadresPattern);// works
         //findMatches(personalID.get(),slovakIdPattern);
         //findMatches(date.get(),datePattern);
-        findMatches(macAddress.get(),macAdressPattern);
+        //findMatches(macAddress.get(),macAdressPattern);
 
-        ganoczi((ArrayList<String>) dataIP.get(),ipadresPattern);
-        ganoczi((ArrayList<String>) personalID.get(),slovakIdPattern);
-        ganoczi((ArrayList<String>) date.get(),datePattern);
-        ganoczi((ArrayList<String>) macAddress.get(),macAdressPattern);
+        findMatchesInList((ArrayList<String>) dataIP.get(),ipadresPattern);// works
+        findMatchesInList((ArrayList<String>) personalID.get(),slovakIdPattern);//works
+        findMatchesInList((ArrayList<String>) date.get(),datePattern);// works
+        findMatchesInList((ArrayList<String>) macAddress.get(),macAdressPattern);// works
 
     }
 
-    public static void findMatches(List<String> list, String stringPattern) {
+    public static void findMatches(List list, String stringPattern) {
         String line = list.toString();
 
         Pattern pattern = Pattern.compile(stringPattern);
@@ -57,7 +57,7 @@ public class Main {
         }
         System.out.println("Number of matches:"+count);
     }
-    public static void ganoczi(ArrayList<String> list, String pattern){
+    public static void findMatchesInList(ArrayList<String> list, String pattern){
         Pattern pattern1=Pattern.compile(pattern);
 
         for (int i=0; list.size()>i;i++) {
